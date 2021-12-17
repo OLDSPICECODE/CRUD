@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./w3.css">
+    <link rel="stylesheet" href="./index-w3s.css">
+    <title>CRUD</title>
+</head>
+
+<body>
+    <form class="w3-container" onsubmit="event.preventDefault()">
+        <input class="w3-input" id="fname" name="fname" placeholder="Nombre" />
+        <input class="w3-input" id="lname" name="lname" placeholder="Apellido" />
+        <button class="w3-button w3-round w3-yellow" onclick="clearForm()">Limpiar Formulario</button>
+        <br /><br />
+
+        <button class="w3-button w3-round w3-blue" onclick="create()">Crear</button>
+        <button class="w3-button w3-round w3-blue" onclick="update()">Actualizar</button>
+        <button class="w3-button w3-round w3-blue" onclick="deleteItem()">Eliminar</button>
+        <br /><br />
+        <select id="panel" size="20" onclick="panelClick()"> </select>
+    </form>
+
+    <script type="text/Javascript">
+        let el, i; let data = [ { firstname: "Mauricio", lastname: "Sevilla" }, { firstname: "Jorge", lastname: "Baron" }, { firstname: "Andres", lastname: "Espinoza" }, { firstname: "Rafael", lastname: "Perez" } ]; let panel = document.querySelector("#panel");
+        function clearForm() { document.querySelector("#fname").value = ""; document.querySelector("#lname").value = ""; } function renderItem() { panel.textContent = ""; data.forEach(x => { el = document.createElement("option"); el.innerText = `${x.firstname}
+        ${x.lastname}`; panel.append(el); }); } function create() { let fn = document.querySelector("#fname").value; let ln = document.querySelector("#lname").value; data = [...data, { firstname: fn, lastname: ln }]; clearForm(); console.log(data) renderItem();
+        } function panelClick() { i = panel.selectedIndex; document.querySelector("#fname").value = data[i].firstname; document.querySelector("#lname").value = data[i].lastname; } function update() { data[i].firstname = document.querySelector("#fname").value;
+        data[i].lastname = document.querySelector("#lname").value; renderItem(); } function deleteItem() { data.splice(i, 1); renderItem(); } renderItem();
+    </script>
+
+</body>
+
+</html>
